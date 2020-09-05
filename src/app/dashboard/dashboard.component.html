@@ -1,0 +1,71 @@
+<div>
+  <div>  
+    <h1>DashBoard</h1>
+  
+    <div class="d-flex flex-column float-right pr-3">
+      <!-- <label >Project</label> -->
+      <form>
+          <label>Project</label> <br>
+          <select [(ngModel)]="selectProjectId" name="projectSelect">
+          <option>All</option>
+          <option *ngFor="let project of projects" [(value)]="project.id">{{project.name}}</option>
+        </select>
+      </form>
+      
+    </div>
+    <div class="d-flex flex-column float-right pr-3">
+      <!-- <label >Employee</label> -->
+      <form>
+        <label class >Employee</label><br>
+        <select [(ngModel)]="selectEmployeeId" name="employeeSelect">
+          <option>All</option>
+          <option *ngFor="let employee of employees" [(value)]="employee.Id">{{employee.Name}}</option>
+        </select>
+      </form>
+      
+    </div>
+  </div>
+  <div>
+    <h1>Project Status</h1>
+    <div class="">
+      <div class="d-flex flex-column bg-white p-5">
+          <div >
+            {{selectProject ? selectProject.name : "All Project"}} logged time : {{projectTimelogged}} hr(s)
+          </div>
+        <br>
+
+          <div >
+            {{selectProject ? selectProject.name : "All Project"}} estimated time : {{estimatedTime}} hr(s)
+          </div>
+
+        <br>
+
+        <div>{{selectEmployee ? selectEmployee.Name : "All employee"}} time logged : {{employeeTimeLog}}</div> 
+        <!-- <div >{{selectEmployee.Name}}</div>      -->
+      </div>
+    </div>
+  </div>
+  
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Project</th>
+        <th>Employee</th>
+        <th>Date</th>
+        <th>Logged Time</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let timelog of timelogs; let i= index" >
+        <th>{{ i+1 }}</th>
+        <td>{{timelog.projectName}}</td>
+        <td>{{timelog.employeeName}}</td>
+        <td>{{timelog.dateLogged}}</td>
+        <td>{{timelog.hoursLogged}} hrs</td>
+      </tr>
+    </tbody>
+  </table>
+    
+
+</div>

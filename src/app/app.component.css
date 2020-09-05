@@ -1,0 +1,31 @@
+.TopBar {
+    background-color: #333333;
+    color: white;
+}
+
+.main-class {
+    display: flex;
+}
+
+.side-nav {
+    width: 300px;
+    height: 100%;
+    /* background-color: #b3ffff; */
+    padding-top: 60px
+}
+
+.main-container {
+    width: calc(100% - 300px);
+    height: 100%;
+    border-left: 2px;
+    border-left-style: solid;
+    margin: 20px;
+}
+
+.side-nav h6 {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #818181;
+  display: block;
+}

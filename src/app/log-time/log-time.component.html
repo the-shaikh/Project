@@ -1,0 +1,27 @@
+<form action="">
+    <div class="form-group">
+        <label for="">Date</label>
+        <input type="text" [(ngModel)]="date" name="dateInput" class="form-control" placeholder="DD/MM/YYYY">
+    </div>
+    <div class="form-group">
+        <label for="">Time Logged</label>
+        <input type="text" [(ngModel)]="timelogged" name="timeInput" class="form-control" placeholder="Time">
+    </div>
+    <div class="form-group">
+        <label for="">Select Project</label>
+        <select [(ngModel)]="selectProjectId" class="form-control" name="projetSelect"> 
+        <option *ngFor="let project of projects" [(value)]="project.id">{{project.name}}</option>
+    </select>
+    </div>
+    <div class="form-group">
+        <label for="">Select Employee</label>
+        <select [(ngModel)]="selectEmployeeId"  class="form-control" name="employyeSelect">
+        <option *ngFor="let employee of employees" [(value)]="employee.Id">{{employee.Name}}</option>
+    </select>
+    </div>
+    <button  class="btn btn-primary" [disabled]="!date || !timelogged || !selectProjectId || !selectEmployeeId" 
+            (click)="onSubmit()" >
+            Add Log
+    </button>
+
+</form>

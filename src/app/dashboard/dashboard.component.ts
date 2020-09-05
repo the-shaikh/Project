@@ -37,48 +37,7 @@ export class DashboardComponent implements OnInit {
     this.projects = [];
     this.timelogs = [];
 
-    // this.employees= [
-    //   {Id:1,Name:"Jack"},
-    //   {Id:2,Name:"Billy"},
-    //   {Id:3,Name:"Flint"},
-    //   {Id:4,Name:"Crow"},
-    // ];
-    // this.projects = [
-    //   {id:1,name:"Project1",estimatedTime: 5},
-    //   {id:2,name:"Project2",estimatedTime: 8},
-    //   {id:3,name:"Project3",estimatedTime: 10},
-    // ];
-    // this.timelogs = [
-    //   {
-    //     projectName: "Project1",
-    //     projectID:1,
-    //     employeeName:"Billy",
-    //     employeeID:2,
-    //     dateLogged:"12/08/2020",
-    //     hoursLogged:2
-    //   },{
-    //     projectName: "Project1",
-    //     projectID:1,
-    //     employeeName:"Crow",
-    //     employeeID:4,
-    //     dateLogged:"12/08/2020",
-    //     hoursLogged:1
-    //   },{
-    //     projectName: "Project3",
-    //     projectID:3,
-    //     employeeName:"Flint",
-    //     employeeID:3,
-    //     dateLogged:"12/08/2020",
-    //     hoursLogged:5
-    //   },{
-    //     projectName: "Project2",
-    //     projectID:2,
-    //     employeeName:"Billy",
-    //     employeeID:2,
-    //     dateLogged:"12/08/2020",
-    //     hoursLogged:3
-    //   },
-    // ];
+    
 
     // this.selectEmployeeId = 3
     // this.selectProjectId = 4
@@ -87,7 +46,7 @@ export class DashboardComponent implements OnInit {
 
 
     this.testService.getEmployeesList().subscribe(res=>{
-      this.employees.push(... res.map(
+      this.employees.push(...res.map(
         item => new Employee(item.payload.val()["EmployeeID"],item.payload.val()["name"])
       ));
       console.log("employe test")
@@ -97,7 +56,7 @@ export class DashboardComponent implements OnInit {
     });
 
     this.testService.getProjectList().subscribe(res=>{
-      this.projects.push(... res.map(
+      this.projects.push(...res.map(
         item => new Project(item.payload.val()["ProjectID"],item.payload.val()["Name"],item.payload.val()["EstimatedTime"])
       ));
       console.log(this.projects)
@@ -123,7 +82,6 @@ export class DashboardComponent implements OnInit {
 
 
 
-    this.estimatedTime = this.projects.reduce((sum, current) => sum + current.estimatedTime, 0);
 
     this.employeeTimeLog = this.timelogs.filter(
       item => (item.employeeID == this.selectEmployeeId)
@@ -140,13 +98,33 @@ export class DashboardComponent implements OnInit {
   };
 
 
-  
+  projectChange() {
+    this.selectProject = this.projects.find(item => item.id == this.selectProjectId);
+    this.projectTimelogged = this.timelogs.filter(
+      item => (
+        // (this.selectEmployeeId==0 || item.employeeID == this.selectEmployeeId)  
+        item.projectID == this.selectProjectId
+        // && (this.selectProjectId==0 || item.projectID == this.selectProjectId)
+      )
+    ).reduce((sum, current) => sum + current.hoursLogged, 0);
 
-  selectedProject(selectedProjectId: number){
-    if(selectedProjectId>0)
-      return true;
-    else 
-      return false;
+    this.estimatedTime = this.projects.filter(
+      item => (
+        // (this.selectEmployeeId==0 || item.employeeID == this.selectEmployeeId)  
+        item.id == this.selectProjectId
+        // && (this.selectProjectId==0 || item.projectID == this.selectProjectId)
+      )
+    ).reduce((sum, current) => sum + current.estimatedTime, 0);
+  }
+
+  employeeChange(){
+
+    console.log("insdie change")
+    console.log(this.selectEmployeeId);
+    this.selectEmployee = this.employees.find(item => item.Id == this.selectEmployeeId);
+    this.employeeTimeLog = this.timelogs.filter(
+    item => this.selectEmployeeId == 0 || item.employeeID == this.selectEmployeeId)
+    .reduce((sum, current) => sum + current.hoursLogged, 0);
   }
   
 }

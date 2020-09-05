@@ -42,6 +42,7 @@ export class TestService {
 
   
   addTimeLog(data: any) {
+    console.log("insdie service ")
     return new Promise<any>((resolve, reject) =>{
       this.FireService.collection('Main')
       .add(data)

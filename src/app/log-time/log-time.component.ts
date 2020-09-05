@@ -64,7 +64,7 @@ export class LogTimeComponent implements OnInit {
       
 
       console.log("submitted")
-      // console.log(data);
+      console.log(data);
      this.testService.addTimeLog(data)
          .then(res => {
              console.log("done")

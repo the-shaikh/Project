@@ -1,13 +1,13 @@
 <div>
   <div>  
-    <h1>DashBoard</h1>
+    <h3>Dashboard</h3>
   
     <div class="d-flex flex-column float-right pr-3">
       <!-- <label >Project</label> -->
       <form>
           <label>Project</label> <br>
-          <select [(ngModel)]="selectProjectId" name="projectSelect">
-          <option>All</option>
+          <select [(ngModel)]="selectProjectId" (change)="projectChange()" name="projectSelect">
+          <option value="0">All</option>
           <option *ngFor="let project of projects" [(value)]="project.id">{{project.name}}</option>
         </select>
       </form>
@@ -17,8 +17,8 @@
       <!-- <label >Employee</label> -->
       <form>
         <label class >Employee</label><br>
-        <select [(ngModel)]="selectEmployeeId" name="employeeSelect">
-          <option>All</option>
+        <select [(ngModel)]="selectEmployeeId" (change)="employeeChange()" name="employeeSelect">
+          <option value="0" >All</option>
           <option *ngFor="let employee of employees" [(value)]="employee.Id">{{employee.Name}}</option>
         </select>
       </form>
@@ -26,7 +26,7 @@
     </div>
   </div>
   <div>
-    <h1>Project Status</h1>
+    <h4>Project Status</h4>
     <div class="">
       <div class="d-flex flex-column bg-white p-5">
           <div >
